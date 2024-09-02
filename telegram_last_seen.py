@@ -18,8 +18,6 @@ SNOWFLAKE_ACCOUNT = os.environ['SNOWFLAKE_ACCOUNT']
 SNOWFLAKE_DATABASE = os.environ['SNOWFLAKE_DATABASE']
 SNOWFLAKE_SCHEMA = os.environ['SNOWFLAKE_SCHEMA']
 SNOWFLAKE_WAREHOUSE = os.environ['SNOWFLAKE_WAREHOUSE']
-if api_id is None or api_hash is None:
-    raise ValueError("API_ID or API_HASH environment variables are not set correctly!")
 
 # Session file path
 session_file = 'faruktest_session'
@@ -32,7 +30,7 @@ async def fetch_last_seen():
     print('fetch_last_seen started!')
     print(type(api_id), type(api_hash))
     # Initialize Telegram Client
-    client = TelegramClient(session_file, api_id, api_hash)
+    client = TelegramClient(session_file, int(api_id), api_hash)
     try:
         await client.start(phone_number)
         print("Telegram client started successfully.")
