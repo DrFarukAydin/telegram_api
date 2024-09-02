@@ -25,10 +25,6 @@ session_file = 'faruktest_session'
 # Global variable to store last_seen values
 last_seen_list = []
 
-# Telegram API credentials
-api_id = '26686454'  # Replace with actual API ID
-api_hash = 'eb1ab5976497c843263891b543fa1e43'  # Replace with actual API hash
-phone_number = '+905323575321'  # Ensure this is in international format
 
 # Session file path
 session_file = 'faruktest_session_2'
