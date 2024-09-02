@@ -20,7 +20,7 @@ SNOWFLAKE_SCHEMA = os.environ['SNOWFLAKE_SCHEMA']
 SNOWFLAKE_WAREHOUSE = os.environ['SNOWFLAKE_WAREHOUSE']
 
 # Session file path
-session_file = 'faruktest_session'
+session_file = 'faruktest_session_2'
 
 # Global variable to store last_seen values
 last_seen_list = []
