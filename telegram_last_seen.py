@@ -25,10 +25,6 @@ session_file = 'faruktest_session'
 # Global variable to store last_seen values
 last_seen_list = []
 
-import asyncio
-from telethon import TelegramClient
-import os
-
 # Telegram API credentials
 api_id = 26686454  # Replace with actual API ID
 api_hash = 'eb1ab5976497c843263891b543fa1e43'  # Replace with actual API hash
@@ -36,37 +32,6 @@ phone_number = '+905323575321'  # Ensure this is in international format
 
 # Session file path
 session_file = 'faruktest_session_2'
-
-async def fetch_last_seen():
-    print('Initializing Telegram Client...')
-    print(f"API ID: {api_id}, API Hash: {api_hash}, Session File: {session_file}")
-    
-    client = TelegramClient(session_file, api_id, api_hash)
-    print('Telegram Client initialized.')
-
-    try:
-        await client.start(phone_number)
-        print("Telegram client started successfully.")
-
-        # Check if the session file was created
-        if os.path.exists(session_file):
-            print(f"Session file created successfully: {session_file}")
-        else:
-            print(f"Session file not created: {session_file}")
-
-    except Exception as e:
-        print(f"Error starting Telegram client: {e}")
-    finally:
-        await client.disconnect()
-
-def main():
-    asyncio.run(fetch_last_seen())
-
-if __name__ == "__main__":
-    if os.path.exists(session_file):
-        os.remove(session_file)  # Remove old session file if exists
-    main()
-
 
 async def fetch_last_seen():
     global last_seen_list
