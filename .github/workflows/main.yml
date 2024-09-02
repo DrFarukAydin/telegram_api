@@ -30,6 +30,7 @@ jobs:
         API_ID: ${{ secrets.API_ID }}
         API_HASH: ${{ secrets.API_HASH }}
         PHONE_NUMBER: ${{ secrets.PHONE_NUMBER }}
+        GROUP_ID: ${{ secrets.GROUP_ID }}
         SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER }}
         SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_PASSWORD }}
         SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
