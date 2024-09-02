@@ -18,6 +18,8 @@ SNOWFLAKE_ACCOUNT = os.environ['SNOWFLAKE_ACCOUNT']
 SNOWFLAKE_DATABASE = os.environ['SNOWFLAKE_DATABASE']
 SNOWFLAKE_SCHEMA = os.environ['SNOWFLAKE_SCHEMA']
 SNOWFLAKE_WAREHOUSE = os.environ['SNOWFLAKE_WAREHOUSE']
+if api_id is None or api_hash is None:
+    raise ValueError("API_ID or API_HASH environment variables are not set correctly!")
 
 # Session file path
 session_file = 'faruktest_session'
