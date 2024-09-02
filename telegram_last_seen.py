@@ -28,6 +28,10 @@ last_seen_list = []
 async def fetch_last_seen():
     global last_seen_list
     print('fetch_last_seen started!')
+    if type(api_id) == str:
+        print('api_id is str')
+    else:
+        print('api_id is not str')
     print(type(api_id), type(api_hash))
     # Initialize Telegram Client
     client = TelegramClient(session_file, int(api_id), api_hash)
