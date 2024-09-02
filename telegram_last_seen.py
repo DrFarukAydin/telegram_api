@@ -27,6 +27,8 @@ last_seen_list = []
 
 async def fetch_last_seen():
     global last_seen_list
+    print('fetch_last_seen started!')
+    print(api_id)
     # Initialize Telegram Client
     client = TelegramClient(session_file, api_id, api_hash)
     try:
