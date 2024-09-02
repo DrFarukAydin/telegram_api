@@ -104,4 +104,7 @@ def main():
 if __name__ == "__main__":
     if os.path.exists(session_file):
         os.remove(session_file)  # Remove old session file if exists
+    # Ensure session file creation
+    with open(session_file, 'w') as f:
+        pass  # Create an empty session file
     main()
