@@ -25,6 +25,28 @@ session_file = 'faruktest_session'
 # Global variable to store last_seen values
 last_seen_list = []
 
+import os
+
+# Define the path where the session file will be created
+session_file_dir = os.getcwd()
+test_file_path = os.path.join(session_file_dir, 'test_write_permissions.txt')
+
+try:
+    # Try to create and write to a test file
+    with open(test_file_path, 'w') as test_file:
+        test_file.write("Test file creation and write permissions successful.")
+
+    # If successful, print a success message
+    print(f"Successfully created and wrote to {test_file_path}")
+
+    # Clean up by removing the test file
+    os.remove(test_file_path)
+except Exception as e:
+    # If an error occurs, print the error message
+    print(f"Failed to create or write to the file. Error: {e}")
+
+
+
 async def fetch_last_seen():
     global last_seen_list
     print('fetch_last_seen started!')
