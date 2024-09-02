@@ -31,9 +31,10 @@ async def fetch_last_seen():
     var_api = api_id.upper()
     print(var_api)
     print(int(api_id))
-    print(api_id[:5])
+    print(api_hash[:5])
     if type(api_id) == str:
         print('api_id is str')
+        print(int(api_id))
     else:
         print('api_id is not str')
     print(type(api_id), type(api_hash))
