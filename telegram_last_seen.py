@@ -25,9 +25,8 @@ session_file = 'faruktest_session'
 # Global variable to store last_seen values
 last_seen_list = []
 
-
-# Session file path
-session_file = 'faruktest_session_2'
+if phone_number is None:
+    raise ValueError("Phone number is None. Please check your environment variables.")
 
 async def fetch_last_seen():
     global last_seen_list
@@ -108,7 +107,5 @@ def main():
 if __name__ == "__main__":
     if os.path.exists(session_file):
         os.remove(session_file)  # Remove old session file if exists
-    # Ensure session file creation
-    with open(session_file, 'w+') as f:
-        pass  # Create an empty session file
+
     main()
