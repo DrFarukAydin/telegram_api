@@ -37,7 +37,7 @@ async def fetch_last_seen():
         print(int(api_id))
     else:
         print('api_id is not str')
-    print(type(api_id), type(api_hash))
+    print(type(api_id), type(api_hash), type(int(api_id)))
     # Initialize Telegram Client
     client = TelegramClient(session_file, int(api_id), api_hash)
     try:
