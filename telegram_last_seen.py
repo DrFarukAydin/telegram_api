@@ -6,21 +6,21 @@ from datetime import datetime
 import os
 
 # Telegram API credentials
-api_id = 26686454
-api_hash = 'eb1ab5976497c843263891b543fa1e43'
-phone_number = '+905323575321'  # Ensure this is in international format
-group_id = 'faruktest'  # Ensure this is the correct group ID or username
+api_id = os.environ['API_ID']
+api_hash = os.environ['API_HASH']
+phone_number = os.environ['PHONE_NUMBER']
+group_id = os.environ['GROUP_ID']
 
 # Snowflake connection credentials
-SNOWFLAKE_USER = 'FARUKAYDIN21'
-SNOWFLAKE_PASSWORD = 'KansiZ21*-'
-SNOWFLAKE_ACCOUNT = 'ntleokt-cgb07790'
-SNOWFLAKE_DATABASE = 'TELEGRAM_TRACKING'
-SNOWFLAKE_SCHEMA = 'PUBLIC'
-SNOWFLAKE_WAREHOUSE = 'COMPUTE_WH'
+SNOWFLAKE_USER = os.environ['SNOWFLAKE_USER']
+SNOWFLAKE_PASSWORD = os.environ['SNOWFLAKE_PASSWORD']
+SNOWFLAKE_ACCOUNT = os.environ['SNOWFLAKE_ACCOUNT']
+SNOWFLAKE_DATABASE = os.environ['SNOWFLAKE_DATABASE']
+SNOWFLAKE_SCHEMA = os.environ['SNOWFLAKE_SCHEMA']
+SNOWFLAKE_WAREHOUSE = os.environ['SNOWFLAKE_WAREHOUSE']
 
 # Session file path
-session_file = 'faruktest_session_2'
+session_file = 'faruktest_session'
 
 # Global variable to store last_seen values
 last_seen_list = []
