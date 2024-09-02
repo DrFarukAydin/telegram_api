@@ -25,8 +25,6 @@ session_file = 'faruktest_session'
 # Global variable to store last_seen values
 last_seen_list = []
 
-if phone_number is None:
-    raise ValueError("Phone number is None. Please check your environment variables.")
 
 async def fetch_last_seen():
     global last_seen_list
@@ -41,8 +39,15 @@ async def fetch_last_seen():
     else:
         print('api_id is not str')
     print(type(api_id), type(api_hash), type(int(api_id)))
+    
     # Initialize Telegram Client
-    client = TelegramClient(session_file, int(api_id), api_hash)
+    try:
+        client = TelegramClient(session_file, int(api_id), api_hash)
+        print("TelegramClient initialized successfully.")
+    except Exception as e:
+        print(f"Error initializing TelegramClient: {e}")
+        return
+        
     try:
         await client.start(phone_number)
         print("Telegram client started successfully.")
