@@ -28,6 +28,10 @@ last_seen_list = []
 async def fetch_last_seen():
     global last_seen_list
     print('fetch_last_seen started!')
+    var_api = api_id.upper()
+    print(var_api)
+    print(int(api_id))
+    print(api_hash[:5])
     if type(api_id) == str:
         print('api_id is str')
     else:
