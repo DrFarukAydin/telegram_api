@@ -99,10 +99,16 @@ def save_to_snowflake(user_id, username, last_seen_time, points_awarded):
         # Use MERGE statement to perform upsert operation
         cursor.execute(f"""
             MERGE INTO users AS target
-            USING (SELECT '{user_id}' AS user_id, '{username}' AS username, '{last_seen_time}' AS last_seen, {points_awarded} AS points) AS source
+            USING (SELECT 
+                    '{user_id}' AS user_id, 
+                    '{username}' AS username, 
+                    '{last_seen_time}' AS last_seen, 
+                    {points_awarded} AS points) AS source
             ON target.user_id = source.user_id
             WHEN MATCHED THEN
-                UPDATE SET target.last_seen = source.last_seen, target.points = target.points + source.points
+                UPDATE SET 
+                    target.last_seen = source.last_seen, 
+                    target.points = target.points + source.points
             WHEN NOT MATCHED THEN
                 INSERT (user_id, username, last_seen, points) 
                 VALUES (source.user_id, source.username, source.last_seen, source.points);
@@ -123,6 +129,7 @@ def save_to_snowflake(user_id, username, last_seen_time, points_awarded):
             cursor.close()
         if conn:
             conn.close()
+
 
 
 def main():
