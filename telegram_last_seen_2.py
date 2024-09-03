@@ -116,7 +116,7 @@ def save_to_snowflake(user_id, username, last_seen_time, points_awarded):
         
         # Insert into point history table
         cursor.execute("""
-            INSERT INTO point_history (user_id, points_awarded, hour_checked)
+            INSERT INTO point_history (user_id, point_awarded, hour_checked)
             VALUES (%s, %s, %s)
         """, (str(user_id), points_awarded, datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')))
         
