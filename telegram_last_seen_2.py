@@ -2,7 +2,7 @@ import asyncio
 from telethon import TelegramClient
 from telethon.errors import SessionPasswordNeededError, PhoneCodeInvalidError, FloodWaitError
 import snowflake.connector
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 import os
 
 # Telegram API credentials
@@ -59,9 +59,15 @@ async def fetch_last_seen():
         await client.disconnect()
 
 def calculate_points(last_seen_time):
+    # Ensure last_seen_time is timezone-naive by converting it to UTC and then making it naive
+    if last_seen_time.tzinfo is not None:
+        last_seen_time = last_seen_time.astimezone(timezone.utc).replace(tzinfo=None)
+
     now = datetime.utcnow()
     # Calculate the difference from the beginning of the current hour
     current_hour_start = now.replace(minute=0, second=0, microsecond=0)
+
+    # Calculate time difference
     time_diff = current_hour_start - last_seen_time
 
     # If last seen within the last hour, full 24 points
