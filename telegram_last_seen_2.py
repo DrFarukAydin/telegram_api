@@ -95,27 +95,35 @@ def save_to_snowflake(user_id, username, last_seen_time, points_awarded):
         )
 
         cursor = conn.cursor()
-        # Update user table
-        cursor.execute("""
-            INSERT INTO users (user_id, username, last_seen, points)
-            VALUES (%s, %s, %s, %s)
-            ON CONFLICT(user_id) 
-            DO UPDATE SET last_seen = excluded.last_seen, points = users.points + excluded.points
-        """, (str(user_id), username, last_seen_time, points_awarded))
+
+        # Use MERGE statement to perform upsert operation
+        cursor.execute(f"""
+            MERGE INTO users AS target
+            USING (SELECT '{user_id}' AS user_id, '{username}' AS username, '{last_seen_time}' AS last_seen, {points_awarded} AS points) AS source
+            ON target.user_id = source.user_id
+            WHEN MATCHED THEN
+                UPDATE SET target.last_seen = source.last_seen, target.points = target.points + source.points
+            WHEN NOT MATCHED THEN
+                INSERT (user_id, username, last_seen, points) 
+                VALUES (source.user_id, source.username, source.last_seen, source.points);
+        """)
         
         # Insert into point history table
         cursor.execute("""
-            INSERT INTO point_history (user_id, point_awarded, hour_checked)
+            INSERT INTO point_history (user_id, points_awarded, hour_checked)
             VALUES (%s, %s, %s)
         """, (str(user_id), points_awarded, datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')))
         
         conn.commit()
-        print('Committed')
+        print('Data committed to Snowflake successfully.')
     except Exception as e:
         print(f"Error saving to Snowflake: {e}")
     finally:
-        cursor.close()
-        conn.close()
+        if cursor:
+            cursor.close()
+        if conn:
+            conn.close()
+
 
 def main():
     asyncio.run(fetch_last_seen())
