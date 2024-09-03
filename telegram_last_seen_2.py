@@ -38,7 +38,7 @@ async def fetch_last_seen():
 
         # Iterate over participants in the specified group
         async for user in client.iter_participants(group_id):
-            
+            print(user)
             if user.status:
                 last_seen = user.status.to_dict().get('was_online')
                 
